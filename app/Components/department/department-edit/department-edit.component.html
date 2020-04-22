@@ -1,0 +1,36 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+  <div>
+    <h3 class="text-center text-uppercase">טופס הוספה ועדכון סניפים</h3>
+    <input type="hidden" name="DepartmentID" #DepartmentID="ngModel" [(ngModel)]="service.formData.DepartmentID" />
+
+    <div class="form-group required">
+      <label>שם סניף</label>
+      <input name="DepartmentName" #DepartmentName="ngModel" [(ngModel)]="service.formData.DepartmentName" class="form-control" onkeypress="this.value = this.value.substring(0,24)" required />
+      <div class="validation-error" *ngIf="DepartmentName.invalid && DepartmentName.touched">שדה רישום זה הוא חובה</div>
+    </div>
+
+    <div class="form-group required">
+      <label>כתובת</label>
+      <input name="Address" #Address="ngModel" [(ngModel)]="service.formData.Address" class="form-control" onkeypress="this.value = this.value.substring(0,24)" required />
+      <div class="validation-error" *ngIf="Address.invalid && Address.touched">שדה רישום זה הוא חובה</div>
+    </div>
+
+    <div class="form-group required">
+      <label>מיקום מדויק</label>
+      <div>
+          <label style="margin-right:20px;font-weight:bolder;font-size:small">מדרום לצפון</label>
+          <select style="font-weight:bolder" name="Longitude" #Longitude="ngModel" [(ngModel)]="service.formData.Longitude" required>
+            <option style="font-weight:bold" *ngFor="let longitude of longitudeArr">{{(longitude).toFixed(2)}}</option>
+          </select>
+          <label style="margin-right:20px;font-weight:bolder;font-size:small">ממערב למזרח</label>
+          <select style="font-weight:bolder" name="Latitude" #Latitude="ngModel" [(ngModel)]="service.formData.Latitude" required>
+            <option style="font-weight:bold" *ngFor="let latitude of latitudeArr">{{(latitude).toFixed(2)}}</option>
+          </select>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" style="background-color:green;font-weight:bold;width:200px;margin:auto" class="btn btn-lg btn-block">עדכון/הוספה</button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+button {
+  font-size: 14px;
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+&.hover {
+  background-color: #cfd8dc;
+}
+
+&.delete-button {
+  float: right;
+  background-color: gray !important;
+  background-color: rgb(216, 59, 1) !important;
+  color: white;
+  padding: 4px;
+  position: relative;
+  font-size: 12px;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}

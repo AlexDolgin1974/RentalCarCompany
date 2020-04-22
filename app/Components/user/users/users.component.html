@@ -1,0 +1,84 @@
+  <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <div>
+      <h3 class="text-center text-uppercase">טופס הוספה ועדכון עובדים ומשתמשים</h3>
+      <input type="hidden" name="UserID" #UserID="ngModel" [(ngModel)]="service.formData.UserID" />
+
+      <div *ngIf="service.flagUserName" class="form-group required">
+        <label>שם משתמש</label>
+        <input name="UserName" #UserName="ngModel" [(ngModel)]="service.formData.UserName" class="form-control" onkeypress="this.value = this.value.substring(0,24)" required />
+        <div class="validation-error" *ngIf="UserName.invalid && UserName.touched">שדה רישום זה הוא חובה</div>
+      </div>
+
+      <div *ngIf="!service.flagUserName" class="form-group">
+        <label>שם משתמש</label>
+        <h4 style="color:blue">{{service.formData.UserName}}</h4>
+        <input type="hidden" name="UserName" #UserName="ngModel" [(ngModel)]="service.formData.UserName"  />
+      </div>
+
+      <div class="form-group required">
+        <label>מספר ת.ז.</label>
+        <input name="PassportNumber" #PassportNumber="ngModel" [(ngModel)]="service.formData.PassportNumber" class="form-control" pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" title="9 ספרות" onkeypress="this.value = this.value.substring(0,8)" required />
+        <div class="validation-error" *ngIf="PassportNumber.invalid && PassportNumber.touched">שדה רישום זה הוא חובה , <br>9 ספרות</div>
+      </div>
+
+      <div class="form-group required">
+        <label>שם מלא</label>
+        <input name="FullName" #FullName="ngModel" [(ngModel)]="service.formData.FullName" class="form-control" onkeypress="this.value = this.value.substring(0,24)" required />
+        <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">שדה רישום זה הוא חובה</div>
+      </div>
+
+      <div class="form-group">
+        <label>תאריך לידה</label>
+        <input name="Birthday" type="date" #Birthday="ngModel" [(ngModel)]="service.formData.Birthday" class="form-control" style="font-size:small" />
+      </div>
+
+      <div class="form-group required">
+        <label>דואר אלקטרוני</label>
+        <input type="email" name="eMail" #eMail="ngModel" [(ngModel)]="service.formData.eMail" class="form-control" pattern="[^@]*@[^@]*" title="dugma@dugma" onkeypress="this.value = this.value.substring(0,24)" required />
+        <div class="validation-error" *ngIf="eMail.invalid && eMail.touched">שדה רישום זה הוא חובה</div>
+      </div>
+
+      <div class="form-group required">
+        <label>סיסמא</label>
+        <input name="Password" #Password="ngModel" [(ngModel)]="service.formData.Password" class="form-control" pattern=".{4,24}" title="מינימום 4 תווים" onkeypress="this.value = this.value.substring(0,24)" required />
+        <div class="validation-error" *ngIf="Password.invalid && Password.touched">שדה רישום זה הוא חובה , מינימום 4 תווים</div>
+      </div>
+
+      <div class="form-group required">
+        <label>מין</label>
+        <div>
+          <label style="font-weight:bold"><input name="Sex" value="זכר" type="radio" #Sex="ngModel" [(ngModel)]="service.formData.Sex" required />זכר&nbsp;&nbsp;</label>
+          <label style="font-weight:bold"><input name="Sex" value="נקבה" type="radio" #Sex="ngModel" [(ngModel)]="service.formData.Sex" required />נקבה</label>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="service.formData.Status!='לקוח' || service.formData.CountOfOrders <= 0"></div>
+
+      <div class="form-group" *ngIf="service.formData.CountOfOrders > 0">
+        <label><input name="CountOfOrders" value="{{service.formData.CountOfOrders}}" #CountOfOrders="ngModel" [(ngModel)]="service.formData.CountOfOrders" type="hidden" /> סה"כ הזמנות:{{service.formData.CountOfOrders}}</label>
+      </div>
+
+      <div class="form-group required" *ngIf="service.formData.Status!='מנהל'">
+        <label>סטטוס</label>
+        <div>
+          <label style="font-weight:bold;color:forestgreen"><input name="Status" value="עובד" type="radio" #Status="ngModel" [(ngModel)]="service.formData.Status" required />עובד&nbsp;&nbsp;</label>
+          <label style="font-weight:bold;color:blue"><input name="Status" value="לקוח" type="radio" #Status="ngModel" [(ngModel)]="service.formData.Status" required />לקוח</label>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="service.formData.Status=='מנהל'">
+        <label>סטטוס</label>
+        <div>
+          <input name="Status" value="מנהל" type="hidden" #Status="ngModel" [(ngModel)]="service.formData.Status" />
+          <label style="font-weight:bold;color:red">מנהל</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <img [src]="service.formData.Picture" />
+        <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)" name="Picture" #Picture="ngModel" [(ngModel)]="service.formData.Picture" />
+      </div>
+
+      </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="form.invalid" style="background-color:green;font-weight:bold;width:200px;float:right" class="btn btn-lg btn-block">עדכון/הוספה</button>
+    </div>
+  </form>

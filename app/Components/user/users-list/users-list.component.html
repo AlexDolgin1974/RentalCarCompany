@@ -1,0 +1,25 @@
+<div class="container py-5">
+  <h3 class="text-center text-uppercase">רשימת עובדים ומשתמשים</h3>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr class="text-center text-uppercase" style="background-color:darkgrey">
+          <th>שם משתמש</th>
+          <th>שם מלא</th>
+          <th>תמונה</th>
+          <th>סטטוס</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of service.list" style="cursor:pointer;text-align:center">
+          <td style="font-weight:bold" (click)="populateForm(user)">{{user.UserName}}</td>
+          <td (click)="populateForm(user)">{{user.FullName}}</td>
+          <td (click)="populateForm(user)"><img src="{{user.Picture}}" /></td>
+          <td *ngIf="user.Status=='מנהל'" style="color:red;font-weight:bold" (click)="populateForm(user)">{{user.Status}}</td>
+          <td *ngIf="user.Status=='עובד'" style="color:green;font-weight:bold" (click)="populateForm(user)">{{user.Status}}</td>
+          <td *ngIf="user.Status=='לקוח'" style="color:blue;font-weight:bold" (click)="populateForm(user)">{{user.Status}}</td>
+          <td><button *ngIf="user.Status!='מנהל'" class="btn btn-sm btn-outlinr-danger" style="background-color:orangered;font-weight:bold" (click)="deleteUser(user.UserID,user.CountOfOrders)">מחיקה</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+div.form-group {
+  width: 20%;
+  height: 70px;
+  float: right;
+  text-align: right;
+  font-weight: bolder;
+  margin-right: 10px;
+}
+
+/*button {
+  font-size: 14px;
+  font-family: Arial;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}*/
+/*&.hover {
+  background-color: #cfd8dc;
+}*/
+
+input {
+  font-weight: bold;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}
+h6 {
+  color: blue;
+  font-weight: bold;
+}

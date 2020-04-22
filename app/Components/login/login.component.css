@@ -1,0 +1,47 @@
+/*/*div.validation-error {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: red;
+}*/
+/*div.container {
+  width: 300px;
+  height:400px;
+  background:#e9aa67;
+  border:2px solid #000000;
+  margin-top:40px;
+}
+.form-group {*/
+  /*width: 300px;*/
+  /*float: right;*/
+  /*text-align: right;
+}
+
+  .form-group > input {
+    font-weight: bolder;
+  }
+
+  .form-group > label {
+    font-weight: bolder;
+  }
+
+  .form-group > img {
+    width: 100px;
+    height: 100px;
+  }
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+.form-control > input.valid {
+  border-color: green;
+}
+
+.form-control > input.invalid {
+  border-color: red;
+}*/
+
+
+

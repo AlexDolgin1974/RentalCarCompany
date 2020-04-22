@@ -1,0 +1,22 @@
+
+<div class="container py-5">
+  <h3 class="text-center text-uppercase">רשימת מכוניות</h3>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr class="text-center text-uppercase" style="background-color:darkgrey">
+        <th>שם יצרן</th>
+        <th>דגם</th>
+        <th>מס' רכב</th>
+        <th>תמונה</th>       
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of service.list" style="cursor:pointer;text-align:center">
+        <td style="font-weight:bold" (click)="populateForm(car)">{{car.CarName}}</td>
+        <td (click)="populateForm(car)">{{car.Model}}</td>
+        <td (click)="populateForm(car)">{{car.CarNumber}}</td>
+        <td (click)="populateForm(car)"><img src="{{car.Picture}}" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

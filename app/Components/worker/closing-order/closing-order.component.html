@@ -1,0 +1,36 @@
+<div class="container py-5" style="position:relative;opacity:0.90">
+  <div style="background-color:darkgrey;border:double">
+    <h1 class="text-center text-uppercase" style="color:white;-webkit-text-stroke:1px black">דף הזמנות פתוחות</h1>
+    <h3 class="text-center text-uppercase" style="color:red">* נא לבחור הזמנה לסגירה</h3>
+  </div>
+  <div style="max-height:430px;overflow-y:scroll;border:double">
+    <table class="table table-bordered table-striped" style="background-color:white">
+      <thead>
+        <tr class="text-center text-uppercase" style="background-color:darkgrey">
+          <th>מס' הזמנה</th>
+          <th>שם משתמש</th>
+          <th>מס' רכב</th>
+          <th>תאריך מסירת הרכב</th>
+          <th>תאריך החזרת הרכב</th>
+          <th>מחיר עסקה בש"ח</th>
+          <th>סטטוס הזמנה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orderService.list" style="cursor:pointer;text-align:center">
+          <td *ngIf="order.StatusOrder=='פתוחה'" style="font-weight:bold" (click)="populateForm(order.OrderID)">{{order.OrderID}}</td>
+          <ng-container *ngFor="let user of userService.list">
+            <td (click)="populateForm(order.OrderID)" *ngIf="order.UserID==user.UserID && order.StatusOrder=='פתוחה'">{{user.UserName}}</td>
+          </ng-container>
+          <ng-container *ngFor="let car of carService.list">
+            <td (click)="populateForm(order.OrderID)" *ngIf="order.CarID==car.CarID && order.StatusOrder=='פתוחה'">{{car.CarNumber}}</td>
+          </ng-container>
+          <td *ngIf="order.StatusOrder=='פתוחה'" (click)="populateForm(order.OrderID)">{{order.StartDate|date:'dd/MM/yyyy'}}</td>
+          <td *ngIf="order.StatusOrder=='פתוחה'" (click)="populateForm(order.OrderID)">{{order.CloseDate|date:'dd/MM/yyyy'}}</td>
+          <td *ngIf="order.StatusOrder=='פתוחה'" (click)="populateForm(order.OrderID)">{{order.Price}}</td>
+          <td *ngIf="order.StatusOrder=='פתוחה'" (click)="populateForm(order.OrderID)">{{order.StatusOrder}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

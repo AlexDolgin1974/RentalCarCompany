@@ -1,0 +1,116 @@
+<div style="margin:auto;margin-top:50px;text-align:center;width:70%;border:double;height:480px;background-color:antiquewhite;position:relative;opacity:0.90">
+  <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <div>
+    <input type="hidden" name="CarID" #CarID="ngModel" [(ngModel)]="carService.formData.CarID" />
+    <input type="hidden" name="CarNumber" #CarNumber="ngModel" [(ngModel)]="carService.formData.CarNumber" />
+    <input type="hidden" name="ReadyToRent" #ReadyToRent="ngModel" [(ngModel)]="carService.formData.ReadyToRent" />
+    <input type="hidden" name="FreeToRent" #FreeToRent="ngModel" [(ngModel)]="carService.formData.FreeToRent" />
+    <input type="hidden" name="UserID" #UserID="ngModel" [(ngModel)]="orderService.formData.UserID" required />
+    <input type="hidden" name="StatusOrder" #StatusOrder="ngModel" [(ngModel)]="orderService.formData.StatusOrder" />
+
+    <div>
+      <img name="Picture" #Picture="ngModel" [(ngModel)]="carService.formData.Picture" src="{{carService.formData.Picture}}" style="margin:20px;width:150px;height:100px" />
+    </div>
+
+    <div class="form-group">
+      <label style="text-align:right">שם יצרן</label>
+      <div>
+        <h6>{{carService.formData.CarName}}</h6>
+        <input type="hidden" name="CarName" #CarName="ngModel" [(ngModel)]="carService.formData.CarName" />
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label>דגם</label>
+      <div>
+        <h6>{{carService.formData.Model}}</h6>
+        <input type="hidden" name="Model" #Model="ngModel" [(ngModel)]="carService.formData.Model" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>שנת יצור</label>
+      <div>
+        <h6>{{carService.formData.Year}}</h6>
+        <input type="hidden" name="Year" #Year="ngModel" [(ngModel)]="carService.formData.Year" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>גיר</label>
+      <div>
+        <h6>{{carService.formData.Gear}}</h6>
+        <input type="hidden" name="Gear" #Gear="ngModel" [(ngModel)]="carService.formData.Gear" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>קילומטרז' נוכחי</label>
+      <div>
+        <h6>{{carService.formData.Kilometr}}</h6>
+        <input type="hidden" name="Kilometr" #Kilometr="ngModel" [(ngModel)]="carService.formData.Kilometr" />
+      </div>
+    </div>
+
+    <input type="hidden" name="DepartmentID" #DepartmentID="ngModel" [(ngModel)]="carService.formData.DepartmentID" />
+    <div class="form-group">
+      <label>סניף</label>
+      <div *ngFor="let depart of departmentServes.list">
+        <input disabled style="background-color:antiquewhite;color:blue;border:none;" name="DepartmentName" *ngIf="depart.DepartmentID==carService.formData.DepartmentID" value="{{depart.DepartmentName}}" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>עלות יומית בש"ח</label>
+      <div>
+        <h6>{{carService.formData.PriceByDay}}</h6>
+        <input type="hidden" name="PriceByDay" #PriceByDay="ngModel" [(ngModel)]="carService.formData.PriceByDay" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>עלות יום איחור בש"ח</label>
+      <div>
+        <h6>{{carService.formData.PriceNextDay}}</h6>
+        <input type="hidden" name="PriceNextDay" #PriceNextDay="ngModel" [(ngModel)]="carService.formData.PriceNextDay" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <h6 style="color:red">* נא לבחור תאריך לקבלת והחזרת הרכב</h6>
+    </div>
+
+    <div class="form-group">
+      <label>תאריך התחלה שכירות</label>
+      <div>
+        <input type="date" name="StartDate" #StartDate="ngModel" [(ngModel)]="orderService.formData.StartDate"  (change)="price()" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>תאריך סיום השכרה</label>
+      <div>
+        <input type="date" name="CloseDate" #CloseDate="ngModel" [(ngModel)]="orderService.formData.CloseDate" [min]="orderService.formData.StartDate" (change)="price()" required />
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>מחיר בש"ח</label>
+      <div>
+        <h6 *ngIf="orderService.formData.Price > 0">{{orderService.formData.Price}}</h6>
+        <input type="hidden" style="background-color:antiquewhite;border:none" name="Price" #Price="ngModel" [(ngModel)]="orderService.formData.Price" required />
+      </div>
+    </div>
+  </div>
+
+      <div class="form-group">
+        <button type="submit" [disabled]="form.invalid" style="background-color:green;font-weight:bold;width:120px;height:50px;margin:20px">אישור הזמנה</button>
+      </div>
+      <div class="form-group">
+        <button style="background-color:cornflowerblue;font-weight:bold;width:100px;height:50px;margin:20px" (click)="backClick()">חזרה</button>
+      </div>
+</form>
+
+</div>

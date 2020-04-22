@@ -1,0 +1,35 @@
+  <div *ngIf="orderService.listByUserID.length>0" class="container py-5" style="position:relative;opacity:0.90">
+  <div style="background-color:darkgrey;border:double"> <h1 class="text-center text-uppercase" style="color:white;-webkit-text-stroke:1px black">רשימה הזמנות</h1></div>
+  <div style="overflow-y: scroll;border:double;max-height:430px">
+    <table class="table table-bordered table-striped" style="background-color:white">
+      <thead>
+        <tr class="text-center text-uppercase" style="background-color:darkgrey">
+          <th>תמונה</th>
+          <th>שם יצרן</th>
+          <th>דגם</th>
+          <th>תאריך מסירה</th>
+          <th>תאריך החזרה</th>
+          <th>תאריך החזרה בפועל</th>
+          <th>סכום עסקה בש"ח</th>
+          <th>סטטוס הזמנה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderService.listByUserID" style="cursor:pointer;text-align:center">
+          <td><img src="{{item.Picture}}" style="width:100px;height:50px" /></td>
+          <td>{{item.CarName}}</td>
+          <td>{{item.Model}}</td>
+          <td>{{item.StartDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{item.CloseDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{item.FinishDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{item.Price}}</td>
+          <td>{{item.StatusOrder}}</td>
+          <!--<td><button class="btn btn-sm btn-outlinr-danger" style="background-color:orangered;font-weight:bold" (click)="deleteCar(car.CarID)">מחיקה</button></td>-->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div *ngIf="orderService.listByUserID.length<=0" style="color:orangered;text-align:center;margin-top:20px;position:relative">
+    <h5>אין עדיין הזמנות</h5>
+  </div>

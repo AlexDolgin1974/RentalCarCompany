@@ -1,0 +1,16 @@
+h1 {
+  text-align: center;
+  position: relative;
+  color: white;
+  padding-top: 5%;
+  font-size: 300%;
+  -webkit-text-stroke: 1px black
+}
+h6{
+text-align: center;
+  position: relative;
+  color: white;
+  padding-top: 5%;
+  font-size: 200%;
+  -webkit-text-stroke: 1px black
+}

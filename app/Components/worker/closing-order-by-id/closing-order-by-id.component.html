@@ -1,0 +1,126 @@
+<div style="margin:auto;border:double;margin-top:20px;text-align:center;width:70%;height:490px;background-color:antiquewhite;position:relative;opacity:0.90">
+  <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <h1>טופס החזרת רכב</h1>
+    <div *ngFor="let order of orderService.listByOrderID">
+
+      <input type="hidden" name="PriceByDay" #PriceByDay="ngModel" [(ngModel)]="order.PriceByDay" />
+      <input type="hidden" name="FinalKilometr" #FinalKilometr="ngModel" [(ngModel)]="order.FinalKilometr" />
+      <input type="hidden" name="StatusOrder" #StatusOrder="ngModel" [(ngModel)]="order.StatusOrder" />
+      <input type="hidden" name="CountOfOrders" #CountOfOrders="ngModel" [(ngModel)]="order.CountOfOrders" />
+      <input type="hidden" name="FreeToRent" #FreeToRent="ngModel" [(ngModel)]="order.FreeToRent" />
+
+
+      <div class="form-group">
+        <label>מס' הזמנה</label>
+        <div>
+          <h6>{{order.OrderID}}</h6>
+          <input type="hidden" name="OrderID" #OrderID="ngModel"  [(ngModel)]="order.OrderID" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>שם משתמש</label>
+        <div>
+          <h6>{{order.UserName}}</h6>
+          <input type="hidden" name="UserName" #UserID="ngModel" [(ngModel)]="order.UserName" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>מס' רכב</label>
+        <div>
+          <h6>{{order.CarNumber}}</h6>
+          <input type="hidden" name="CarNumber" #CarNumber="ngModel" [(ngModel)]="order.CarNumber" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>קילומטרז' במסירת הרכב</label>
+        <div>
+          <h6>{{order.Kilometr}}</h6>
+          <input type="hidden" name="Kilometr" #Kilometr="ngModel" [(ngModel)]="order.Kilometr" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>קילומטרז' בהחזרת הרכב</label>
+        <div>
+          <!--<input pattern="[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]" onkeypress="this.value = this.value.substring(0,6)" name="FinalKilometr" #FinalKilometr="ngModel" [(ngModel)]="order.FinalKilometr" [placeholder]="order.Kilometr" required />-->
+          <input type="number"  onkeypress="this.value = this.value.substring(0,6)" name="FinalKilometr" #FinalKilometr="ngModel" [(ngModel)]="order.FinalKilometr" [placeholder]="order.Kilometr" required />
+
+
+          <h6 class="validation-error" style="color:red" *ngIf="FinalKilometr.errors?.required && FinalKilometr.touched">שדה רישום זה הוא חובה</h6>
+          <!--<div class="validation-error" *ngIf="FinalKilometr.errors?.pattern && FinalKilometr.touched">יש להזין בין 1 עד 7 ספרות</div>-->
+        </div>
+      </div>
+
+      <div class="form-group">
+      </div>
+
+      <div class="form-group">
+        <label>תאריך התחלת השכרה</label>
+        <div>
+          <h6>{{order.StartDate|date:'dd/MM/yyyy'}}</h6>
+          <input type="hidden" name="StartDate" #StartDate="ngModel" [(ngModel)]="order.StartDate" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>תאריך סיום השכרה</label>
+        <div>
+          <h6>{{order.CloseDate|date:'dd/MM/yyyy'}}</h6>
+          <input type="hidden" name="CloseDate" #CloseDate="ngModel" [(ngModel)]="order.CloseDate" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>תאריך החזרה בפועל</label>
+        <div>
+          <input type="date" name="FinishDate" #FinishDate="ngModel" [(ngModel)]="order.FinishDate" (change)="price(form)" [min]="order.CloseDate" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>מחיר לפני החזרת רכב</label>
+        <div>
+          <h6>{{order.Price}}</h6>
+          <input type="hidden" name="Price" #Price="ngModel" [(ngModel)]="order.Price" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>מחיר ליום איחור בש"ח</label>
+        <div>
+          <h6>{{order.PriceNextDay}}</h6>
+          <input type="hidden" name="PriceNextDay" #PriceNextDay="ngModel" [(ngModel)]="order.PriceNextDay" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>מחיר סופי</label>
+        <div>
+          <h6 *ngIf="orderService.formOrder.FinalPrice>0">{{orderService.formOrder.FinalPrice}}</h6>
+          <input type="hidden"  name="FinalPrice" #FinalPrice="ngModel" [(ngModel)]="orderService.formOrder.FinalPrice"  required />
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="form-group">
+      <button type="submit" [disabled]="form.invalid" style="background-color:green;font-weight:bold;width:120px;height:50px;margin:20px">אישור החזרת רכב</button>
+    </div>
+    <div class="form-group">
+      <button style="background-color:cornflowerblue;font-weight:bold;width:100px;height:50px;margin:20px" (click)="backClick()">חזרה</button>
+    </div>
+  </form>
+
+  </div>
+
+
+
+
+
+
+ 

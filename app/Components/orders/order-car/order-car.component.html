@@ -1,0 +1,30 @@
+  <div class="container py-5" style="position:relative;opacity:0.90;">
+    <div  style="background-color:darkgrey;border:double"> <h1 class="text-center text-uppercase" style="color:white;-webkit-text-stroke:1px black">רשימת מכוניות</h1></div>
+    <div style="max-height:410px;overflow-y: scroll;border:double">
+  <table class="table table-bordered table-striped" style="background-color:white">
+      <thead>
+        <tr class="text-center text-uppercase" style="background-color:darkgrey">
+          <th>שם יצרן</th>
+          <th>דגם</th>
+          <th>שנת יצור</th>
+          <th>תמונה</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of carService.list" style="cursor:pointer;text-align:center">
+          <td *ngIf="(car.FreeToRent=='כן' && car.ReadyToRent=='תקין')" style="font-weight:bold" (click)="populateForm(car)">{{car.CarName}}</td>
+          <td *ngIf="(car.FreeToRent=='לא' || car.ReadyToRent=='לא תקין')" style="font-weight:bold" title="רכב לא פנוי או לא תקין להשכרה">{{car.CarName}}</td>
+          <td *ngIf="(car.FreeToRent=='כן' && car.ReadyToRent=='תקין')" style="font-weight:bold" (click)="populateForm(car)">{{car.Model}}</td>
+          <td *ngIf="(car.FreeToRent=='לא' || car.ReadyToRent=='לא תקין')" style="font-weight:bold" title="רכב לא פנוי או לא תקין להשכרה">{{car.Model}}</td>
+          <td *ngIf="(car.FreeToRent=='כן' && car.ReadyToRent=='תקין')" style="font-weight:bold" (click)="populateForm(car)">{{car.Year}}</td>
+          <td *ngIf="(car.FreeToRent=='לא' || car.ReadyToRent=='לא תקין')" style="font-weight:bold" title="רכב לא פנוי או לא תקין להשכרה">{{car.Year}}</td>
+          <td *ngIf="(car.FreeToRent=='כן' && car.ReadyToRent=='תקין')" style="font-weight:bold" (click)="populateForm(car)"><img src="{{car.Picture}}" /></td>
+          <td *ngIf="(car.FreeToRent=='לא' || car.ReadyToRent=='לא תקין')" style="font-weight:bold" title="רכב לא פנוי או לא תקין להשכרה"><img src="{{car.Picture}}" /></td>
+          <td *ngIf="(car.FreeToRent=='כן' && car.ReadyToRent=='תקין')"(click)="populateForm(car)"><button class="btn btn-sm btn-outlinr-danger" style="background-color:green;font-weight:bold" >פרטים והזמנה</button></td>
+          <td *ngIf="(car.FreeToRent=='לא' || car.ReadyToRent=='לא תקין')" title="רכב לא פנוי או לא תקין להשכרה"><button disabled class="btn btn-sm btn-outlinr-danger" style="background-color:orangered;font-weight:bold" (click)="selectCar(car.CarID)">פרטים והזמנה</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div></div>
+

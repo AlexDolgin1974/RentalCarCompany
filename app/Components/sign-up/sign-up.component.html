@@ -1,0 +1,67 @@
+<div style="width:800px;border:double;height:540px;background-color:azure;padding-top:30px;padding-right:50px;margin:auto;position:relative;opacity:0.90">
+  <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+    <h2 style="text-align:center;padding-bottom:20px">טופס הרשמה</h2>
+    <div class="form-group required">
+      <label>שם משתמש</label>
+      <input class="form-control" formControlName="UserName" required autofocus />
+      <label class="text-danger" *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">שדה רישום זה הוא חובה</label>
+    </div>
+    <div class="form-group required">
+      <label>שם מלא</label>
+      <input class="form-control" formControlName="FullName" required />
+      <label class="text-danger" *ngIf="service.formModel.get('FullName').touched && service.formModel.get('FullName').errors?.required">שדה רישום זה הוא חובה</label>
+    </div>
+    <div class="form-group required">
+      <label>מס' תעודת זהות</label>
+      <input pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" class="form-control" onkeypress="this.value = this.value.substring(0,8)" formControlName="PassportNumber" required />
+      <label class="text-danger" *ngIf="service.formModel.get('PassportNumber').touched && service.formModel.get('PassportNumber').errors?.pattern">יש להזין 9 ספרות</label>
+      <label class="text-danger" *ngIf="service.formModel.get('PassportNumber').touched && service.formModel.get('PassportNumber').errors?.required">שדה רישום זה הוא חובה</label>
+    </div>
+    <div class="form-group">
+      <label>תאריך לידה</label>
+      <input class="form-control" type="date" formControlName="Birthday" />
+    </div>
+    <div class="form-group required">
+      <label>מין</label>
+      <div>
+        <label style="font-weight:bold"><input formControlName="Sex" value="זכר" type="radio" required />זכר&nbsp;&nbsp;</label>
+        <label style="font-weight:bold"><input formControlName="Sex" value="נקבה" type="radio" required />נקבה</label>
+      </div>
+    </div>
+    <div class="form-group required">
+      <label>אמייל</label>
+      <input class="form-control" formControlName="eMail" required />
+      <label class="text-danger" *ngIf="service.formModel.get('eMail').touched && service.formModel.get('eMail').errors?.required">שדה רישום זה הוא חובה</label>
+      <label class="text-danger" *ngIf="service.formModel.get('eMail').touched && service.formModel.get('eMail').errors?.email">כתובת דוא"ל לא חוקית</label>
+    </div>
+
+    <div formGroupName="Passwords">
+      <div class="form-group required">
+        <label>סיסמא</label>
+        <input class="form-control" formControlName="Password" type="password" required />
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">שדה רישום זה הוא חובה</label>
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">מינימום 4 תווים</label>
+      </div>
+      <div class="form-group required">
+        <label>אישור סיסמא</label>
+        <input class="form-control" formControlName="ConfirmPassword" type="password" required />
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">שדה רישום זה הוא חובה</label>
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">אישור סיסמא אינו תואם</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <img [src]="imageUrl" />
+      </div>
+      <div>
+        <input type="file" id="file-input" style="font-weight:bold;width:200px" #Image accept="image/*" (change)="handleFileInput($event.target.files)" formControlName="Picture" />
+      </div>
+    </div>
+
+    <input class="form-control" formControlName="CountOfOrders" type="hidden" />
+    <div class="form-group">
+      <button type="submit" [disabled]="service.formModel.invalid" style="background-color:green;font-weight:bold;width:200px;height:60px;float:left" Class="success">אישור</button>
+    </div>
+  </form>
+</div>

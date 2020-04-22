@@ -1,0 +1,41 @@
+<div class="container py-5" style="position:relative;opacity:0.90">
+  <div style="background-color:darkgrey;border:double"> <h1 class="text-center text-uppercase" style="color:white;-webkit-text-stroke:1px black">רשימת מכוניות</h1></div>
+  <div style="max-height:430px;overflow-y:scroll;border:double">
+    <table class="table table-bordered table-striped" style="background-color:white">
+      <thead>
+        <tr class="text-center text-uppercase" style="background-color:darkgrey">
+          <th>שם היצרן</th>
+          <th>דגם</th>
+          <th>מס' רכב</th>
+          <th>תמונה</th>
+          <th>שנת יצור</th>
+          <th>גיר</th>
+          <th>קילומטרז' נוכחי</th>
+          <th>עלות יומית בש"ח</th>
+          <th>עלות יום איחור בש"ח</th>
+          <th>תקין/לא תקין</th>
+          <th>פנוי/לא פנוי</th>
+          <th>סניף</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of service.list" style="cursor:pointer;text-align:center">
+          <td style="font-weight:bold" (click)="populateForm(car)">{{car.CarName}}</td>
+          <td (click)="populateForm(car)">{{car.Model}}</td>
+          <td (click)="populateForm(car)">{{car.CarNumber}}</td>
+          <td (click)="populateForm(car)"><img src="{{car.Picture}}" style="width:150px;height:100px" /></td>
+          <td (click)="populateForm(car)">{{car.Year}}</td>
+          <td (click)="populateForm(car)">{{car.Gear}}</td>
+          <td (click)="populateForm(car)">{{car.Kilometr}}</td>
+          <td (click)="populateForm(car)">{{car.PriceByDay}}</td>
+          <td (click)="populateForm(car)">{{car.PriceNextDay}}</td>
+          <td (click)="populateForm(car)">{{car.ReadyToRent}}</td>
+          <td (click)="populateForm(car)">{{car.FreeToRent}}</td>
+          <ng-container *ngFor="let depart of departmentServes.list">
+            <td (click)="populateForm(car)" *ngIf="depart.DepartmentID==car.DepartmentID">{{depart.DepartmentName}}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

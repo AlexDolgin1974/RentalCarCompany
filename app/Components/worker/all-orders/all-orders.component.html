@@ -1,0 +1,35 @@
+<div class="container py-5" style="position:relative;opacity:0.90">
+  <div style="background-color:darkgrey;border:double"> <h1 class="text-center text-uppercase" style="color:white;-webkit-text-stroke:1px black">רשימת כל ההזמנות</h1></div>
+  <div style="overflow-y: scroll;max-height:420px;border:double">
+    <table class="table table-bordered table-striped" style="background-color:white">
+      <thead>
+        <tr class="text-center text-uppercase" style="background-color:darkgrey">
+          <th>מס' הזמנה</th>
+          <th>שם משתמש</th>
+          <th>מס' רכב</th>
+          <th>תאריך מסירת הרכב</th>
+          <th>תאריך החזרת הרכב</th>
+          <th>תאריך החזרה בפועל</th>
+          <th>מחיר העסקה בש"ח</th>
+          <th>סטטוס הזמנה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orderService.list" style="cursor:pointer;text-align:center">
+          <td style="font-weight:bold" (click)="populateForm(order)">{{order.OrderID}}</td>
+          <ng-container *ngFor="let user of userService.list">
+            <td (click)="populateForm(order)" *ngIf="order.UserID==user.UserID">{{user.UserName}}</td>
+          </ng-container>
+          <ng-container *ngFor="let car of carService.list">
+            <td (click)="populateForm(order)" *ngIf="order.CarID==car.CarID">{{car.CarNumber}}</td>
+          </ng-container>
+          <td (click)="populateForm(order)">{{order.StartDate|date:'dd/MM/yyyy'}}</td>
+          <td (click)="populateForm(order)">{{order.CloseDate|date:'dd/MM/yyyy'}}</td>
+          <td (click)="populateForm(order)">{{order.FinishDate|date:'dd/MM/yyyy'}}</td>
+          <td (click)="populateForm(order)">{{order.Price}}</td>
+          <td (click)="populateForm(order)">{{order.StatusOrder}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

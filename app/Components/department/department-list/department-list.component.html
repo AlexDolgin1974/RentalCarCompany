@@ -1,0 +1,22 @@
+
+<div class="container py-5">
+  <h3 class="text-center text-uppercase">רשימה סניפים</h3>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr class="text-center text-uppercase" style="background-color:darkgrey">
+        <th>שם סניף</th>
+        <th>כתובת</th>
+        <th>מיקום מדויק</th>
+        <!--<th></th>-->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let depart of service.list" style="cursor:pointer;text-align:center">
+        <td style="font-weight:bold" (click)="populateForm(depart)">{{depart.DepartmentName}}</td>
+        <td (click)="populateForm(depart)">{{depart.Address}}</td>
+        <td (click)="populateForm(depart)">{{depart.Longitude}}/{{depart.Latitude}}</td>
+        <!--<td><button class="btn btn-sm btn-outlinr-danger" style="background-color:orangered;font-weight:bold" (click)="deleteDepartment(depart.DepartmentID)">מחיקה</button></td>-->
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,60 @@
+<div class="background-img"></div>
+
+<div class="container" style="background-color:white;position:relative;opacity:0.80">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <img src="/assets/img/logo.jpg" style="width:80px;height:45px" />
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" [routerLink]="['/home']">דף הבית</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogClient" class="nav-link" data-toggle="tab" [routerLink]="['/client/orderCar']">חיפוש והשכרת רכב</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogClient" class="nav-link" data-toggle="tab" [routerLink]="['/client/myOrders']">הזמנות שלי</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogWorker" class="nav-link" data-toggle="tab" [routerLink]="['/worker/ordersList']">רשימת הזמנות פתוחות</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogWorker" class="nav-link" data-toggle="tab" [routerLink]="['/worker/allOrdersList']">צפיה בכל ההזמנות</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogWorker" class="nav-link" data-toggle="tab" [routerLink]="['/worker/carList']">רשימת מכוניות</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogManager" class="nav-link" data-toggle="tab" [routerLink]="['/manager/editUser']">עדכון עובדים ומשתמשים</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogManager" class="nav-link" data-toggle="tab" [routerLink]="['/manager/editCar']">עדכון מכוניות</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogManager" class="nav-link" data-toggle="tab" [routerLink]="['/manager/editDepartment']">עדכון סניף</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="this.loginService.isLogManager" class="nav-link" data-toggle="tab" [routerLink]="['/manager/allOrdersList']">צפיה בכל ההזמנות</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" [routerLink]="['/about']">אודותינו</a>
+    </li>
+
+
+    <li *ngIf="!this.loginService.isLoggedIn" class="nav-item mr-auto">
+      <a class="nav-link" data-toggle="tab" [routerLink]="['/login']">משתמש קיים</a>
+    </li>
+    <li *ngIf="!(this.loginService.isLogManager || this.loginService.isLogWorker || this.loginService.isLogClient)" class="nav-item">
+      <a class="nav-link active" data-toggle="tab" [routerLink]="['/registration']">הרשמה</a>
+    </li>
+    <li *ngIf="this.loginService.isLoggedIn" class="nav-item mr-auto">
+      <a (click)="logout()" class="nav-link" data-toggle="tab" [routerLink]="['/home']">להתנתק</a>
+    </li>
+    <li *ngIf="this.loginService.isLoggedIn">
+      <p style="color:cadetblue">
+        מחובר
+        {{this.loginService.loginName}}
+      </p>
+    </li>
+  </ul>
+</div>
+

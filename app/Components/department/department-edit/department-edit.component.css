@@ -1,0 +1,41 @@
+div.validation-error {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: red;
+}
+
+.form-group {
+  width: 70%;
+  height: 90px;
+  float: right;
+  text-align: right;
+  margin-right:100px;
+}
+
+  .form-group > input {
+    font-weight: bolder;
+  }
+
+    .form-group > input.ng-touched.ng-invalid {
+      border-color: red;
+    }
+
+  .form-group > label {
+    font-weight: bolder;
+  }
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+.form-group.required > label:first-child::after {
+  content: '*';
+  color: red;
+  padding-right: 5px;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}

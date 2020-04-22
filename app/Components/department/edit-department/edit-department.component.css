@@ -1,0 +1,18 @@
+.form-department {
+  background-color:khaki;
+  padding: 5px;
+  float: right;
+  width: 50%;
+  height: 470px;
+  border: double;
+}
+
+.update-department {
+  background-color: khaki;
+  padding: 5px;
+  float: right;
+  width: 50%;
+  height: 470px;
+  overflow-y: scroll;
+  border: double;
+}

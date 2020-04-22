@@ -1,0 +1,27 @@
+
+.form-group {
+  width: 33%;
+  height:100px;
+  float: right;
+  text-align: right;
+}
+
+  .form-group > input {
+    font-weight: bolder;
+    width: 90%;
+  }
+
+  .form-group > label {
+    font-weight: bolder;
+  }
+
+   img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .form-group.required>label:first-child::after{
+    content:'*';
+    color:red;
+    padding-right:5px;
+  }

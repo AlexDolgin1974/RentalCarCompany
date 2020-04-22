@@ -1,0 +1,137 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+  <div>
+    <h3 class="text-center text-uppercase">טופס הוספה ועדכון מכוניות</h3>
+    <input type="hidden" name="CarID" #CarID="ngModel" [(ngModel)]="service.formData.CarID" />
+
+    <div *ngIf="service.flagCarNumber" class="form-group required">
+      <label>מס' רכב</label>
+      <input pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9]?[0-9]" name="CarNumber" #CarNumber="ngModel" [(ngModel)]="service.formData.CarNumber" class="form-control" onkeypress="this.value = this.value.substring(0,7)" required />
+      <div class="validation-error" *ngIf="CarNumber.invalid && CarNumber.touched && !CarNumber.errors?.pattern">שדה רישום זה הוא חובה</div>
+      <div class="validation-error" *ngIf="CarNumber.errors?.pattern && CarNumber.touched">יש להזין 8 או 9 ספרות</div>
+    </div>
+
+    <div *ngIf="!service.flagCarNumber" class="form-group">
+      <label>מס' רכב</label>
+      <h6 style="color:blue">{{service.formData.CarNumber}}</h6>
+      <input type="hidden" name="CarNumber" #CarNumber="ngModel" [(ngModel)]="service.formData.CarNumber" />
+    </div>
+
+    <div *ngIf="service.flagCarNumber" class="form-group required">
+      <label>שם יצרן</label>
+      <input name="CarName" #CarName="ngModel" [(ngModel)]="service.formData.CarName" class="form-control" onkeypress="this.value = this.value.substring(0,18)" required />
+      <div class="validation-error" *ngIf="CarName.invalid && CarName.touched">שדה רישום זה הוא חובה</div>
+    </div>
+
+    <div *ngIf="!service.flagCarNumber" class="form-group">
+      <label>שם יצרן</label>
+      <h6 style="color:blue">{{service.formData.CarName}}</h6>
+      <input type="hidden" name="CarName" #CarName="ngModel" [(ngModel)]="service.formData.CarName" />
+    </div>
+
+    <div *ngIf="service.flagCarNumber" class="form-group required">
+      <label>דגם</label>
+      <input name="Model" #Model="ngModel" [(ngModel)]="service.formData.Model" class="form-control" onkeypress="this.value = this.value.substring(0,18)" required />
+      <div class="validation-error" *ngIf="Model.invalid && Model.touched">שדה רישום זה הוא חובה</div>
+    </div>
+
+    <div *ngIf="!service.flagCarNumber" class="form-group">
+      <label>דגם</label>
+      <h6 style="color:blue">{{service.formData.Model}}</h6>
+      <input type="hidden" name="Model" #Model="ngModel" [(ngModel)]="service.formData.Model" />
+    </div>
+
+    <div *ngIf="service.flagCarNumber" class="form-group required">
+      <label>שנת יצור</label>
+      <select style="font-weight:bolder;font-size:small" name="Year" #Year="ngModel" [(ngModel)]="service.formData.Year" class="form-control" required>
+        <option style="font-weight:bold" *ngFor="let year of yearArr">{{year}}</option>
+      </select>
+    </div>
+
+    <div *ngIf="!service.flagCarNumber" class="form-group">
+      <label>שנת יצור</label>
+      <h6 style="color:blue">{{service.formData.Year}}</h6>
+      <input type="hidden" name="Year" #Year="ngModel" [(ngModel)]="service.formData.Year" />
+    </div>
+
+    <div class="form-group required">
+      <label>גיר</label>
+      <div>
+        <label style="font-weight:bold;color:red;font-size:small"><input name="Gear" value="אוטומטי" type="radio" #Gear="ngModel" [(ngModel)]="service.formData.Gear" required />אוטומטי&nbsp;&nbsp;</label>
+        <label style="font-weight:bold;color:green;font-size:small"><input name="Gear" value="רגיל" type="radio" #Gear="ngModel" [(ngModel)]="service.formData.Gear" required />רגיל&nbsp;&nbsp;</label>
+        <label style="font-weight:bold;color:blue;font-size:small"><input name="Gear" value="רובוטי" type="radio" #Gear="ngModel" [(ngModel)]="service.formData.Gear" required />רובוטי</label>
+      </div>
+      <div class="validation-error" *ngIf="Gear.invalid && Gear.touched">שדה רישום זה הוא חובה</div>
+    </div>
+
+    <div class="form-group required">
+      <label>קילומטרז' נוכחי</label>
+      <input pattern="[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]" name="Kilometr" #Kilometr="ngModel" [(ngModel)]="service.formData.Kilometr" class="form-control" onkeypress="this.value = this.value.substring(0,6)" required />
+      <div class="validation-error" *ngIf="Kilometr.invalid && Kilometr.touched && !Kilometr.errors?.pattern">שדה רישום זה הוא חובה</div>
+      <div class="validation-error" *ngIf="Kilometr.errors?.pattern && Kilometr.touched">יש להזין בין 1 עד 7 ספרות</div>
+    </div>
+
+    <div class="form-group required">
+      <label>עלות יומית בש"ח</label>
+      <input pattern="[0-9][0-9]?[0-9]?[0-9]" name="PriceByDay" #PriceByDay="ngModel" [(ngModel)]="service.formData.PriceByDay" class="form-control" onkeypress="this.value = this.value.substring(0,3)" required />
+      <div class="validation-error" *ngIf="PriceByDay.invalid && PriceByDay.touched && !PriceByDay.errors?.pattern">שדה רישום זה הוא חובה</div>
+      <div class="validation-error" *ngIf="PriceByDay.errors?.pattern && PriceByDay.touched">יש להזין בין 2 עד 4 ספרות</div>
+    </div>
+
+    <div class="form-group required">
+      <label>עלות יום איחור בש"ח</label>
+      <input pattern="[0-9][0-9]?[0-9]?[0-9]" name="PriceNextDay" #PriceNextDay="ngModel" [(ngModel)]="service.formData.PriceNextDay" class="form-control" onkeypress="this.value = this.value.substring(0,3)" required />
+      <div class="validation-error" *ngIf="PriceNextDay.invalid && PriceNextDay.touched && !PriceNextDay.errors?.pattern">שדה רישום זה הוא חובה</div>
+      <div class="validation-error" *ngIf="PriceNextDay.errors?.pattern && PriceNextDay.touched">יש להזין בין 2 עד 4 ספרות</div>
+    </div>
+
+    <div class="form-group required">
+      <label>סניף</label>
+      <select style="font-weight:bolder;font-size:small" name="DepartmentID" #DepartmentID="ngModel" [(ngModel)]="service.formData.DepartmentID" class="form-control" required>
+        <option style="font-weight:bold" *ngFor="let depart of departmentServes.list" [value]="depart.DepartmentID">{{depart.DepartmentName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group required">
+      <label>תקינות</label>
+      <div>
+        <label style="font-weight:bold;color:green;font-size:small"><input name="ReadyToRent" value="תקין" type="radio" #ReadyToRent="ngModel" [(ngModel)]="service.formData.ReadyToRent" required />תקין&nbsp;&nbsp;</label>
+        <label style="font-weight:bold;color:red;font-size:small"><input name="ReadyToRent" value="לא תקין" type="radio" #ReadyToRent="ngModel" [(ngModel)]="service.formData.ReadyToRent" required />לא תקין&nbsp;&nbsp;</label>
+      </div>
+    </div>
+    <div *ngIf="service.formData.FreeToRent=='לא'" class="form-group">
+      <label style="color:red">הרכב לא פנוי להשכרה</label>
+      <div>
+        <input name="FreeToRent" type="hidden" #FreeToRent="ngModel" [(ngModel)]="service.formData.FreeToRent" />
+        <!--<label style="font-weight:bold;color:green"><input name="FreeToRent" value="כן" type="radio" #FreeToRent="ngModel" [(ngModel)]="service.formData.FreeToRent" required />כן&nbsp;&nbsp;</label>
+      <label style="font-weight:bold;color:red"><input name="FreeToRent" value="לא" type="radio" #FreeToRent="ngModel" [(ngModel)]="service.formData.FreeToRent" required />לא&nbsp;&nbsp;</label>-->
+      </div>
+    </div>
+
+    <div *ngIf="service.formData.FreeToRent=='כן'" class="form-group">
+      <label style="color:green">הרכב פנוי להשכרה</label>
+      <div>
+        <input name="FreeToRent" type="hidden" #FreeToRent="ngModel" [(ngModel)]="service.formData.FreeToRent" />
+      </div>
+    </div>
+
+    <div *ngIf="!service.formData.FreeToRent" class="form-group">
+    </div>
+
+    <!--<div class="form-group">
+    <input type="file" name="Picture" #Picture="ngModel" [(ngModel)]="service.formData.Picture" />
+  </div>-->
+
+    <div class="form-group">
+      <img [src]="service.formData.Picture" />
+      <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)" name="Picture" #Picture="ngModel" [(ngModel)]="service.formData.Picture" />
+    </div>
+
+
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" style="background-color:green;font-weight:bold;float:left" class="btn btn-lg btn-block">עדכון/הוספה</button>
+  </div>
+  <div class="form-group">
+    <button type="button" style="background-color:yellow;font-weight:bold;float:left" class="btn btn-lg btn-block" (click)="BlankForm()">טופס ריק</button>
+  </div>
+</form>

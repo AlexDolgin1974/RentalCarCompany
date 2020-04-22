@@ -1,0 +1,19 @@
+.form-car {
+  background-color:gainsboro;
+  padding: 5px;
+  float: right;
+  width: 50%;
+  height: 470px;
+  border: double;
+}
+
+.update-car {
+  background-color: gainsboro;
+  padding: 5px;
+  float: right;
+  width: 50%;
+  height: 470px;
+  overflow-y: scroll;
+  border: double;
+}
+
